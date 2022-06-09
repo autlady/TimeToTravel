@@ -5,7 +5,7 @@
 
 Тестовое задание для iOS - разработчика от компании Wildberries
 
-<img width="343" alt="Снимок экрана 2022-06-07 в 23 23 02" src="https://user-images.githubusercontent.com/98653699/172477223-26eac06c-96a0-4150-9ac9-45d2171cbc96.png">
+https://user-images.githubusercontent.com/98653699/172932678-8a020a04-de1d-4c8a-b47a-a1b83c10bd73.mov
 
 
 ## Обратная связь
