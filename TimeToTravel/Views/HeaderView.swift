@@ -16,15 +16,6 @@ class HeaderView: UIView {
         return imageView
     }()
 
-//    private lazy var travelLabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Пора в путешествие!"
-//        label.textColor = .red
-//        label.font = UIFont(name: "Pacifico-Regular", size: 30)
-//        label.translatesAutoresizingMaskIntoConstraints = false
-//        return label
-//    }()
-
     override init(frame: CGRect) {
         super.init(frame: frame)
         self.drawSelf()
@@ -36,7 +27,6 @@ class HeaderView: UIView {
 
    private func drawSelf() {
        self.addSubview(self.imageView)
-//       self.addSubview(self.travelLabel)
 
                NSLayoutConstraint.activate([
 
@@ -44,10 +34,6 @@ class HeaderView: UIView {
                    imageView.leadingAnchor.constraint(equalTo: self.leadingAnchor),
                    imageView.trailingAnchor.constraint(equalTo: self.trailingAnchor),
                    imageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-
-//                   travelLabel.centerXAnchor.constraint(equalTo: self.centerXAnchor),
-//                   travelLabel.centerYAnchor.constraint(equalTo: self.centerYAnchor),
-
 
                ])
     }

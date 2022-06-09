@@ -67,19 +67,27 @@ class StartViewController: UIViewController {
             trips = jsonTrips.data
             tableView.reloadData()
         }
+
         self.activityIndicator.stopAnimating()
         self.activityIndicator.hidesWhenStopped = true
+
+        //Первоначальное наполнение словаря, на основе полученных данных (для хранения состояний лайков)
+        for element in trips {
+            let tempKey = element.startCity + element.endCity
+            DictLikes.shared.heart[tempKey] = false
+        }
     }
 
     private func setupView() {
-        self.view.addSubview(self.tableView)
+        view.addSubview(self.tableView)
+
         let topConstraint = self.tableView.topAnchor.constraint(equalTo: self.view.topAnchor)
         let leadingConstraint = self.tableView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor)
         let trailingConstraint = self.tableView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor)
         let bottomConstraint = self.tableView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor)
 
         NSLayoutConstraint.activate([
-            topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
+           topConstraint, leadingConstraint, trailingConstraint, bottomConstraint
         ])
     }
 
@@ -93,7 +101,7 @@ class StartViewController: UIViewController {
 }
 
 extension StartViewController: UITableViewDelegate, UITableViewDataSource {
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TravelCell", for: indexPath) as! TravelCell
         cell.delegate = self
@@ -115,6 +123,13 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
             cell.endLabel.text = date
         }
 
+        let tempKey = trip.startCity + trip.endCity
+        if DictLikes.shared.heart[tempKey] == true {
+            cell.likeImage.image = UIImage(systemName: "heart.fill")
+
+        } else if  DictLikes.shared.heart[tempKey] == false {
+            cell.likeImage.image = UIImage(systemName: "heart")
+        }
         return cell
     }
 
@@ -123,7 +138,6 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
         }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-
         return 200
     }
 
@@ -139,9 +153,9 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "TravelCell", for: indexPath) as! TravelCell
         tableView.deselectRow(at: indexPath, animated: true)
         let vc = DetailViewController()
-        vc.setupVC(trip: trips[indexPath.row], indexPath: indexPath, image: (cell.likeImage.image!))
+        let tempKey = trips[indexPath.row].startCity + trips[indexPath.row].endCity
+        vc.setupVC(trip: trips[indexPath.row], indexPath: indexPath,  image: (cell.likeImage.image!), tempKey: tempKey)
         tableView.reloadData()
-
         self.navigationController?.pushViewController(vc, animated: true)
     }
 }
@@ -149,17 +163,17 @@ extension StartViewController: UITableViewDelegate, UITableViewDataSource {
 extension StartViewController: TravelCellProtocol {
     func tapLikes(cell: TravelCell) {
         guard let index = self.tableView.indexPath(for: cell)?.row else { return }
-        let indexPath = IndexPath(row: index, section: 0)
 
-        if cell.likeImage.image == UIImage(systemName: "heart") {
+        let tempKey = trips[index].startCity + trips[index].endCity
+        if DictLikes.shared.heart[tempKey] == false {
+            DictLikes.shared.heart[tempKey] = true
             cell.likeImage.image = UIImage(systemName: "heart.fill")
 
-        } else if  cell.likeImage.image == UIImage(systemName: "heart.fill") {
-                       cell.likeImage.image = UIImage(systemName: "heart")
-                   }
-
-        self.tableView.reloadRows(at: [indexPath], with: .fade)
-
+        } else if  DictLikes.shared.heart[tempKey] == true {
+            DictLikes.shared.heart[tempKey] = false
+            cell.likeImage.image = UIImage(systemName: "heart")
+        }
     }
 }
+
 

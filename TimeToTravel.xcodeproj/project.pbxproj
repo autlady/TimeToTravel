@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4B5F1C79285283CE0034D46C /* DictLikes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4B5F1C78285283CE0034D46C /* DictLikes.swift */; };
 		4BC2BF87284A26BD00126991 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF86284A26BD00126991 /* AppDelegate.swift */; };
 		4BC2BF89284A26BD00126991 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF88284A26BD00126991 /* SceneDelegate.swift */; };
 		4BC2BF8B284A26BD00126991 /* StartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BC2BF8A284A26BD00126991 /* StartViewController.swift */; };
@@ -21,6 +22,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4B5F1C78285283CE0034D46C /* DictLikes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictLikes.swift; sourceTree = "<group>"; };
 		4BC2BF83284A26BD00126991 /* TimeToTravel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TimeToTravel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4BC2BF86284A26BD00126991 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4BC2BF88284A26BD00126991 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 			isa = PBXGroup;
 			children = (
 				4BC2BFA6284B77B400126991 /* Trip.swift */,
+				4B5F1C78285283CE0034D46C /* DictLikes.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -206,6 +209,7 @@
 				4BC2BF9C284A271900126991 /* TravelCell.swift in Sources */,
 				4BC2BFB0284E5F3F00126991 /* Extensions.swift in Sources */,
 				4BC2BFA5284ABAF700126991 /* DetailViewController.swift in Sources */,
+				4B5F1C79285283CE0034D46C /* DictLikes.swift in Sources */,
 				4BC2BF87284A26BD00126991 /* AppDelegate.swift in Sources */,
 				4BC2BFA7284B77B400126991 /* Trip.swift in Sources */,
 				4BC2BF89284A26BD00126991 /* SceneDelegate.swift in Sources */,

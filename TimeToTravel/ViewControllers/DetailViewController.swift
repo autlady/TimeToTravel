@@ -11,6 +11,8 @@ class DetailViewController: UIViewController {
 
     var indexPath: IndexPath = [0, 0]
 
+    var tempKey = ""
+
     private let tapGestureRecognizer = UITapGestureRecognizer()
 
     lazy var background: UIImageView = {
@@ -177,7 +179,7 @@ class DetailViewController: UIViewController {
 
     lazy var likeImage: UIImageView = {
         let imageView = UIImageView()
-        imageView.isUserInteractionEnabled = true
+        imageView.isUserInteractionEnabled = true // важно! чтобы картинка обрабатывала тап
         imageView.image = UIImage(systemName: "heart")
         imageView.contentMode = .scaleAspectFit
         imageView.translatesAutoresizingMaskIntoConstraints = false
@@ -216,7 +218,7 @@ class DetailViewController: UIViewController {
         dateStackView.addArrangedSubview(dateLabel)
         dateStackView.addArrangedSubview(beginLabel)
         dateStackView.addArrangedSubview(endLabel)
-        
+
         likeStackView.addArrangedSubview(likeLabel)
         likeStackView.addArrangedSubview(likeImage)
 
@@ -262,22 +264,23 @@ class DetailViewController: UIViewController {
     @objc private func handleTapGesture(_ gestureRecognizer: UITapGestureRecognizer) {
         guard self.tapGestureRecognizer === gestureRecognizer else { return }
 
-        if likeImage.image == UIImage(systemName: "heart") {
+        if DictLikes.shared.heart[tempKey] == false {
+            DictLikes.shared.heart[tempKey] = true
             likeImage.image = UIImage(systemName: "heart.fill")
-
-        } else if likeImage.image == UIImage(systemName: "heart.fill") {
-                likeImage.image = UIImage(systemName: "heart")
-                   }
+        } else if  DictLikes.shared.heart[tempKey] == true {
+            DictLikes.shared.heart[tempKey] = false
+            likeImage.image = UIImage(systemName: "heart")
+        }
     }
 
 
-
-    func setupVC(trip: Trip, indexPath: IndexPath, image: UIImage) {
+    func setupVC(trip: Trip, indexPath: IndexPath, image: UIImage, tempKey: String) {
 
         secondPriceLabel.text = String(trip.price) + " руб."
         departureLabel.text = trip.startCity
         destinationLabel.text = trip.endCity
         likeImage.image = image
+        self.tempKey = tempKey
 
         let startDate = trip.startDate
         let endDate = trip.endDate
@@ -290,7 +293,12 @@ class DetailViewController: UIViewController {
         }
 
         self.indexPath = indexPath
-    }
-    
 
+        if DictLikes.shared.heart[tempKey] == true {
+            likeImage.image = UIImage(systemName: "heart.fill")
+        } else if  DictLikes.shared.heart[tempKey] == false {
+            likeImage.image = UIImage(systemName: "heart")
+        }
+    }
 }
+
